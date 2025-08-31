@@ -68,15 +68,25 @@ export default function Home() {
         <div className="mt-12">
           <div className="bg-purple-600 text-white rounded-lg p-8">
             <h2 className="text-2xl font-semibold mb-4">
-              Coming Soon!
+              Ready to Get Started?
             </h2>
             <p className="text-purple-200 mb-6">
-              We're building the future of group buying for Indonesian coffee lovers.
-              Join the waitlist to be the first to participate in exclusive campaigns.
+              Join GOMFLOW as an influencer and start monetizing your coffee audience through group buying campaigns.
             </p>
-            <button className="bg-white text-purple-600 hover:bg-purple-50 font-medium py-2 px-4 rounded-lg transition-colors">
-              Join Waitlist
-            </button>
+            <div className="space-x-4">
+              <a 
+                href="/auth" 
+                className="inline-block bg-white text-purple-600 hover:bg-purple-50 font-medium py-2 px-6 rounded-lg transition-colors"
+              >
+                Start as Influencer
+              </a>
+              <a 
+                href="/campaigns" 
+                className="inline-block border-2 border-white text-white hover:bg-white hover:text-purple-600 font-medium py-2 px-6 rounded-lg transition-colors"
+              >
+                Browse Campaigns
+              </a>
+            </div>
           </div>
         </div>
       </div>
