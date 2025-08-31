@@ -1,0 +1,431 @@
+# DROPWAVE MVP Specialist Task Assignments
+# Total: 42 Essential Tasks | 4 Weeks | $45,000 Budget
+
+---
+# SYSTEM ARCHITECT TASKS (8 hours total - Week 1 only)
+system_architect:
+  total_hours: 8
+  deliverables_due: "End of Week 1"
+  
+  tasks:
+    - id: "SA-001"
+      task: "Setup Vercel + Supabase Infrastructure"
+      priority: "CRITICAL"
+      duration: "2 hours"
+      day: "Monday Week 1"
+      deliverables:
+        - Vercel project created and deployed
+        - Supabase project initialized
+        - Environment variables configured
+        - GitHub repo connected for auto-deploy
+      acceptance_criteria:
+        - Next.js app accessible via vercel.app URL
+        - Supabase client can connect successfully
+        - Auto-deploy triggers on main branch push
+      dependencies: none
+      
+    - id: "SA-002"
+      task: "Design Minimal Database Schema"
+      priority: "CRITICAL"
+      duration: "2 hours"
+      day: "Tuesday Week 1"
+      deliverables:
+        - SQL migration file with 4 tables
+        - users table (id, email, created_at)
+        - campaigns table (id, title, target, deadline, creator_id)
+        - orders table (id, campaign_id, email, amount, status)
+        - shares table (id, order_id, platform, clicked_at)
+      acceptance_criteria:
+        - Schema supports core business logic
+        - Foreign keys properly defined
+        - Indexes on lookup fields
+      dependencies: ["SA-001"]
+      
+    - id: "SA-003"
+      task: "Define Stripe Payment Architecture"
+      priority: "HIGH"
+      duration: "2 hours"
+      day: "Wednesday Week 1"
+      deliverables:
+        - Payment flow diagram
+        - Stripe Checkout session configuration
+        - Webhook endpoint specification
+      acceptance_criteria:
+        - Clear checkout redirect flow
+        - Success/cancel URL handling defined
+        - Webhook signature verification planned
+      dependencies: ["SA-002"]
+      
+    - id: "SA-004"
+      task: "Configure CI/CD Pipeline"
+      priority: "MEDIUM"
+      duration: "2 hours"
+      day: "Thursday Week 1"
+      deliverables:
+        - Vercel deployment configuration
+        - Environment variable setup
+        - Preview deployments enabled
+      acceptance_criteria:
+        - Automatic deployment on merge to main
+        - Preview URLs for pull requests
+        - Production environment protected
+      dependencies: ["SA-001"]
+
+---
+# BACKEND API DEVELOPER TASKS (24 hours total - Weeks 1-2)
+backend_api_developer:
+  total_hours: 24
+  deliverables_due: "End of Week 2"
+  
+  week_1_tasks:
+    - id: "BE-001"
+      task: "Implement Magic Link Authentication"
+      priority: "CRITICAL"
+      duration: "4 hours"
+      day: "Monday-Tuesday Week 1"
+      deliverables:
+        - POST /api/auth/request-link endpoint
+        - GET /api/auth/verify endpoint
+        - Session management via Supabase
+      acceptance_criteria:
+        - User can request magic link via email
+        - Token verification works
+        - Session persists across requests
+      dependencies: ["SA-001", "SA-002"]
+      
+    - id: "BE-002"
+      task: "Campaign CRUD Endpoints"
+      priority: "CRITICAL"
+      duration: "6 hours"
+      day: "Tuesday-Wednesday Week 1"
+      deliverables:
+        - POST /api/campaigns - Create campaign
+        - GET /api/campaigns/:id - Get campaign details
+        - GET /api/campaigns/user - List user's campaigns
+      acceptance_criteria:
+        - Campaign creation with validation
+        - Public campaign view works
+        - Creator can see own campaigns
+      dependencies: ["SA-002", "BE-001"]
+      
+  week_2_tasks:
+    - id: "BE-003"
+      task: "Stripe Checkout Integration"
+      priority: "CRITICAL"
+      duration: "4 hours"
+      day: "Monday Week 2"
+      deliverables:
+        - POST /api/checkout/session - Create checkout session
+        - POST /api/webhooks/stripe - Handle payment confirmation
+      acceptance_criteria:
+        - Checkout session created with campaign data
+        - Successful payment creates order
+        - Webhook verifies Stripe signature
+      dependencies: ["SA-003", "BE-002"]
+      
+    - id: "BE-004"
+      task: "Order Tracking System"
+      priority: "HIGH"
+      duration: "4 hours"
+      day: "Tuesday Week 2"
+      deliverables:
+        - POST /api/orders - Create order (via webhook)
+        - GET /api/campaigns/:id/orders - List campaign orders
+        - GET /api/campaigns/:id/progress - Calculate progress
+      acceptance_criteria:
+        - Orders linked to campaigns
+        - Progress percentage calculated correctly
+        - Order list shows buyer emails
+      dependencies: ["BE-003"]
+      
+    - id: "BE-005"
+      task: "Share Tracking Implementation"
+      priority: "HIGH"
+      duration: "6 hours"
+      day: "Wednesday-Thursday Week 2"
+      deliverables:
+        - POST /api/shares - Record share click
+        - GET /api/campaigns/:id/stats - Share statistics
+        - Referral parameter tracking logic
+      acceptance_criteria:
+        - Share events recorded with source
+        - URL parameters tracked properly
+        - Basic analytics available
+      dependencies: ["BE-004"]
+
+---
+# COMPONENT ARCHITECT TASKS (32 hours total - Weeks 2-3)
+component_architect:
+  total_hours: 32
+  deliverables_due: "End of Week 3"
+  
+  week_2_tasks:
+    - id: "CA-001"
+      task: "Campaign Creation Form Component"
+      priority: "CRITICAL"
+      duration: "8 hours"
+      day: "Monday Week 2"
+      components:
+        - CampaignForm.tsx - Main form container
+        - PricingTiers.tsx - 3-tier pricing input
+        - DeadlineSelector.tsx - 48-hour countdown
+      acceptance_criteria:
+        - Form validates required fields
+        - Submits to backend API
+        - Shows loading/error states
+        - Mobile responsive
+      dependencies: ["BE-002", "UI-002"]
+      
+    - id: "CA-002"
+      task: "Campaign Landing Page"
+      priority: "CRITICAL"
+      duration: "8 hours"
+      day: "Tuesday Week 2"
+      components:
+        - CampaignHero.tsx - Title and description
+        - ProgressBar.tsx - Visual progress indicator
+        - PricingCards.tsx - Tier selection
+        - BuyButton.tsx - Checkout trigger
+      acceptance_criteria:
+        - Fetches campaign data from API
+        - Progress updates on page refresh
+        - Checkout redirects to Stripe
+        - Mobile optimized layout
+      dependencies: ["BE-002", "UI-003"]
+      
+  week_3_tasks:
+    - id: "CA-003"
+      task: "Creator Dashboard Components"
+      priority: "HIGH"
+      duration: "6 hours"
+      day: "Monday Week 3"
+      components:
+        - DashboardLayout.tsx - Container
+        - CampaignCard.tsx - Campaign summary
+        - OrdersList.tsx - Recent orders table
+        - RevenueCounter.tsx - Total revenue display
+      acceptance_criteria:
+        - Shows active campaign status
+        - Lists recent orders
+        - Displays total revenue
+        - Export orders to CSV
+      dependencies: ["BE-004", "UI-004"]
+      
+    - id: "CA-004"
+      task: "Checkout Flow Handling"
+      priority: "HIGH"
+      duration: "6 hours"
+      day: "Tuesday Week 3"
+      components:
+        - CheckoutRedirect.tsx - Loading state
+        - PaymentSuccess.tsx - Success page
+        - SharePrompt.tsx - Post-purchase share CTA
+      acceptance_criteria:
+        - Smooth redirect to Stripe
+        - Success page shows order details
+        - Share prompt encourages viral spread
+        - Handles payment failures gracefully
+      dependencies: ["BE-003", "CA-002"]
+      
+    - id: "CA-005"
+      task: "WhatsApp Share Integration"
+      priority: "CRITICAL"
+      duration: "4 hours"
+      day: "Wednesday Week 3"
+      components:
+        - WhatsAppButton.tsx - Share button
+        - ShareMessage.tsx - Message formatter
+        - ShareTracker.tsx - Track share events
+      acceptance_criteria:
+        - Opens WhatsApp with pre-filled message
+        - Includes campaign link with tracking
+        - Records share event to backend
+        - Works on mobile browsers
+      dependencies: ["BE-005", "UI-005"]
+
+---
+# UI DESIGNER TASKS (24 hours total - Week 1 only)
+ui_designer:
+  total_hours: 24
+  deliverables_due: "End of Week 1"
+  
+  tasks:
+    - id: "UI-001"
+      task: "Create Minimal Design System"
+      priority: "CRITICAL"
+      duration: "4 hours"
+      day: "Monday Week 1 Morning"
+      deliverables:
+        - Color palette (brand, success, error, neutral)
+        - Typography scale (heading, body, caption)
+        - Spacing system (8px base unit)
+        - Component styles (button, input, card)
+      acceptance_criteria:
+        - Figma library created
+        - Design tokens documented
+        - Mobile-first approach
+        - Accessible color contrast
+      dependencies: none
+      
+    - id: "UI-002"
+      task: "Design Campaign Creation Form"
+      priority: "CRITICAL"
+      duration: "4 hours"
+      day: "Monday Week 1 Afternoon"
+      deliverables:
+        - Desktop form layout
+        - Mobile form layout
+        - Form field specifications
+        - Error state designs
+      acceptance_criteria:
+        - Single-page form design
+        - Clear visual hierarchy
+        - Touch-friendly on mobile
+        - Validation states shown
+      dependencies: ["UI-001"]
+      
+    - id: "UI-003"
+      task: "Design Campaign Landing Page"
+      priority: "CRITICAL"
+      duration: "6 hours"
+      day: "Tuesday Week 1"
+      deliverables:
+        - Hero section design
+        - Progress bar visualization
+        - Pricing tier cards
+        - CTA button styling
+        - Mobile responsive version
+      acceptance_criteria:
+        - Optimized for conversions
+        - Progress clearly visible
+        - Pricing easy to compare
+        - Mobile-first design
+      dependencies: ["UI-001"]
+      
+    - id: "UI-004"
+      task: "Design Creator Dashboard"
+      priority: "HIGH"
+      duration: "4 hours"
+      day: "Wednesday Week 1 Morning"
+      deliverables:
+        - Dashboard layout
+        - Campaign card design
+        - Orders table design
+        - Revenue display styling
+      acceptance_criteria:
+        - Information hierarchy clear
+        - Key metrics prominent
+        - Mobile responsive
+        - Export button visible
+      dependencies: ["UI-001"]
+      
+    - id: "UI-005"
+      task: "Design Success & Share States"
+      priority: "HIGH"
+      duration: "4 hours"
+      day: "Wednesday Week 1 Afternoon"
+      deliverables:
+        - Payment success page
+        - Share celebration screen
+        - WhatsApp button design
+        - Share message preview
+      acceptance_criteria:
+        - Celebratory feeling
+        - Clear share CTA
+        - Message preview shown
+        - Mobile optimized
+      dependencies: ["UI-001"]
+      
+    - id: "UI-006"
+      task: "Mobile Optimization Pass"
+      priority: "CRITICAL"
+      duration: "2 hours"
+      day: "Thursday Week 1"
+      deliverables:
+        - All designs verified at 360px width
+        - Touch targets sized appropriately
+        - Text readable without zoom
+        - Interactions documented
+      acceptance_criteria:
+        - Works on Indonesian phones
+        - No horizontal scroll
+        - Buttons minimum 44px height
+        - Fast perceived loading
+      dependencies: ["UI-002", "UI-003", "UI-004", "UI-005"]
+
+---
+# VALIDATION METRICS
+validation_criteria:
+  week_1_completion:
+    - All infrastructure setup complete
+    - Database schema deployed
+    - All designs delivered
+    - Authentication working
+    
+  week_2_completion:
+    - Campaign creation functional
+    - Campaign viewing working
+    - Stripe checkout integrated
+    - Basic components built
+    
+  week_3_completion:
+    - Dashboard operational
+    - Share tracking active
+    - All components integrated
+    - End-to-end flow tested
+    
+  week_4_targets:
+    - 5 campaigns launched
+    - $5,000 GMV achieved
+    - 30% share rate documented
+    - Zero critical bugs
+
+---
+# COORDINATION POINTS
+handoff_schedule:
+  week_1:
+    monday: "UI Designer → Component Architect (design system)"
+    tuesday: "System Architect → Backend Dev (database)"
+    wednesday: "UI Designer → Component Architect (all screens)"
+    thursday: "System Architect → Team (infrastructure ready)"
+    friday: "Backend Dev → Component Architect (auth API ready)"
+    
+  week_2:
+    monday: "Backend Dev → Component Architect (campaign API)"
+    tuesday: "Component Architect → Backend Dev (form integration)"
+    wednesday: "Backend Dev → Component Architect (checkout API)"
+    thursday: "Full team integration test"
+    friday: "Founder → Team (beta creator feedback)"
+    
+  week_3:
+    monday: "Backend Dev → Component Architect (final APIs)"
+    tuesday: "Component Architect → Founder (staging ready)"
+    wednesday: "Founder → Team (launch preparation)"
+    thursday: "Full team → Production deployment prep"
+    friday: "Team → Founder (ready for launch)"
+
+---
+# BLOCKING DEPENDENCIES
+critical_path:
+  - SA-001 → SA-002 → BE-001 → BE-002 → CA-001
+  - SA-003 → BE-003 → CA-004
+  - UI-003 → CA-002 → CA-005
+  - BE-005 → CA-005
+  
+must_complete_by:
+  end_of_week_1:
+    - All System Architect tasks
+    - All UI Designer tasks
+    - BE-001, BE-002
+    
+  end_of_week_2:
+    - All Backend API tasks
+    - CA-001, CA-002
+    
+  end_of_week_3:
+    - All Component Architect tasks
+    - Full integration testing
+    
+  end_of_week_4:
+    - 5 live campaigns
+    - Metrics collection
