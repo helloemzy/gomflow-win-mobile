@@ -112,6 +112,17 @@ CREATE POLICY "Campaign owners can view their orders" ON orders
 CREATE POLICY "Customers can view their own orders" ON orders
   FOR SELECT USING (customer_email = auth.email());
 
+-- Utility functions for campaign management
+CREATE OR REPLACE FUNCTION increment_campaign_quantity(campaign_id UUID, quantity_to_add INTEGER)
+RETURNS VOID AS $$
+BEGIN
+  UPDATE campaigns 
+  SET current_quantity = current_quantity + quantity_to_add,
+      updated_at = NOW()
+  WHERE id = campaign_id;
+END;
+$$ LANGUAGE plpgsql;
+
 -- Insert sample data for testing (optional)
 INSERT INTO influencers (email, tiktok_handle, commission_rate, status) VALUES
   ('test@example.com', 'coffee_lover_jkt', 15.00, 'active')
