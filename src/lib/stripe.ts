@@ -1,15 +1,19 @@
 import { loadStripe } from '@stripe/stripe-js'
 import Stripe from 'stripe'
 
-// Client-side Stripe
-export const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-)
+// Client-side Stripe - handle missing API key gracefully
+export const stripePromise = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY &&
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY !== 'your_stripe_publishable_key_here'
+    ? loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+    : null
 
-// Server-side Stripe
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-08-27.basil',
-})
+// Server-side Stripe - handle missing API key gracefully
+export const stripe = process.env.STRIPE_SECRET_KEY && 
+  process.env.STRIPE_SECRET_KEY !== 'your_stripe_secret_key_here' 
+    ? new Stripe(process.env.STRIPE_SECRET_KEY, {
+        apiVersion: '2025-08-27.basil',
+      })
+    : null
 
 // Helper function to check if Stripe is configured
 export const isStripeConfigured = () => {

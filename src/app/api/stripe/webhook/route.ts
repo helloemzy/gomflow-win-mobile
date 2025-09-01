@@ -5,6 +5,14 @@ import { headers } from 'next/headers'
 import Stripe from 'stripe'
 
 export async function POST(request: NextRequest) {
+  // Check if Stripe is configured
+  if (!stripe) {
+    return NextResponse.json(
+      { error: 'Stripe not configured' },
+      { status: 503 }
+    )
+  }
+
   const body = await request.text()
   const headersList = headers()
   const sig = headersList.get('stripe-signature')

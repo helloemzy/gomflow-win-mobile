@@ -6,10 +6,10 @@ import { headers } from 'next/headers'
 export async function POST(request: NextRequest) {
   try {
     // Check if Stripe is configured
-    if (!isStripeConfigured()) {
+    if (!isStripeConfigured() || !stripe) {
       return NextResponse.json(
-        { error: 'Stripe is not configured' },
-        { status: 500 }
+        { error: 'Payment system is not configured. This is a demo deployment.' },
+        { status: 503 }
       )
     }
 
