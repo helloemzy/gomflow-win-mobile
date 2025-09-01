@@ -39,7 +39,7 @@ export default function ShareButtons({
       }
 
       // Generate share content
-      const shareText = `☕ Bergabung dengan grup pembelian kopi premium!\n\n${campaignTitle}\n\n🎯 Mari kita capai target bersama untuk diskon lebih besar!\n💰 Hemat hingga 20% dengan berbagi link ini\n\n${campaignUrl}\n\n#KopiPremium #GroupBuying #GOMFLOW`
+      const shareText = `🛍️ Join this amazing group buying deal!\n\n${campaignTitle}\n\n🎯 Let's reach the target together for bigger discounts!\n💰 Save up to 20% by sharing this link\n\n${campaignUrl}\n\n#GroupBuying #GOMFLOW #Deals`
 
       // Handle different sharing platforms
       switch (platform) {

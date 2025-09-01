@@ -34,6 +34,9 @@ export async function GET(request: NextRequest) {
           
           if (insertError) {
             console.error('Error creating influencer profile:', insertError)
+          } else {
+            // Redirect new users to onboarding
+            return NextResponse.redirect(`${origin}/onboarding`)
           }
         }
       }

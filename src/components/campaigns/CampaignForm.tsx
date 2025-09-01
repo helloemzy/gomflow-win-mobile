@@ -15,7 +15,7 @@ export default function CampaignForm({ onSuccess, onCancel }: CampaignFormProps)
   const [formData, setFormData] = useState({
     coffee_product: '',
     target_quantity: 50,
-    price_per_kg: 150000, // IDR 150,000 per kg
+    price_per_kg: 150000, // IDR 150,000 per unit
     deadline_days: 7,
     discount_threshold_1: 25,
     discount_threshold_2: 50
@@ -97,18 +97,18 @@ export default function CampaignForm({ onSuccess, onCancel }: CampaignFormProps)
     <div className="bg-white rounded-lg shadow-md p-8">
       <div className="mb-6">
         <h2 className="text-2xl font-semibold text-amber-900 mb-2">
-          Create New Coffee Campaign
+          Create New Campaign
         </h2>
         <p className="text-amber-700">
-          Launch a group buying campaign for premium Indonesian coffee and earn commission on every sale.
+          Launch a group buying campaign for premium products and earn commission on every sale.
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Coffee Product Name */}
+        {/* Product Name */}
         <div>
           <label htmlFor="coffee_product" className="block text-sm font-medium text-amber-800 mb-2">
-            Coffee Product Name *
+            Product Name *
           </label>
           <input
             id="coffee_product"
@@ -116,7 +116,7 @@ export default function CampaignForm({ onSuccess, onCancel }: CampaignFormProps)
             value={formData.coffee_product}
             onChange={(e) => handleInputChange('coffee_product', e.target.value)}
             required
-            placeholder="e.g., Premium Aceh Gayo Single Origin"
+            placeholder="e.g., Premium Wireless Headphones, Organic Matcha Tea, etc."
             className="w-full px-3 py-2 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
           />
         </div>
@@ -124,7 +124,7 @@ export default function CampaignForm({ onSuccess, onCancel }: CampaignFormProps)
         {/* Target Quantity */}
         <div>
           <label htmlFor="target_quantity" className="block text-sm font-medium text-amber-800 mb-2">
-            Target Quantity (kg) *
+            Target Quantity (units) *
           </label>
           <input
             id="target_quantity"
@@ -137,14 +137,14 @@ export default function CampaignForm({ onSuccess, onCancel }: CampaignFormProps)
             className="w-full px-3 py-2 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
           />
           <p className="text-sm text-amber-600 mt-1">
-            Minimum 10kg, maximum 500kg. Higher targets may take longer to complete.
+            Minimum 10 units, maximum 500 units. Higher targets may take longer to complete.
           </p>
         </div>
 
-        {/* Price per kg */}
+        {/* Price per unit */}
         <div>
           <label htmlFor="price_per_kg" className="block text-sm font-medium text-amber-800 mb-2">
-            Price per Kilogram (IDR) *
+            Price per Unit (IDR) *
           </label>
           <input
             id="price_per_kg"
@@ -158,7 +158,7 @@ export default function CampaignForm({ onSuccess, onCancel }: CampaignFormProps)
             className="w-full px-3 py-2 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
           />
           <p className="text-sm text-amber-600 mt-1">
-            Current: {formatPrice(formData.price_per_kg)}/kg • Recommended range: IDR 80,000 - 300,000
+            Current: {formatPrice(formData.price_per_kg)}/unit • Recommended range: IDR 50,000 - 500,000
           </p>
         </div>
 

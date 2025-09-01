@@ -8,11 +8,11 @@ export default function Home() {
             GOMFLOW
           </h1>
           <p className="text-xl text-amber-800 mb-6">
-            Indonesian Coffee Group Buying Platform
+            Influencer Group Buying Platform
           </p>
           <p className="text-lg text-amber-700 max-w-2xl mx-auto">
-            Join coffee influencers in group buying campaigns. 
-            Get premium Indonesian coffee at discounted prices through viral sharing campaigns.
+            Create viral group buying campaigns for any product. 
+            Influencers earn commission while customers unlock discounts through social sharing.
           </p>
         </div>
 
@@ -44,7 +44,7 @@ export default function Home() {
               For Influencers
             </h3>
             <ul className="text-left text-amber-700 space-y-2">
-              <li>• Monetize your coffee audience</li>
+              <li>• Monetize any audience niche</li>
               <li>• 15-20% commission on sales</li>
               <li>• No inventory risk</li>
               <li>• Easy campaign creation</li>
@@ -53,13 +53,13 @@ export default function Home() {
 
           <div className="bg-white rounded-lg shadow-md p-6">
             <h3 className="text-xl font-semibold text-amber-800 mb-3">
-              For Coffee Lovers
+              For Customers
             </h3>
             <ul className="text-left text-amber-700 space-y-2">
-              <li>• Exclusive coffee campaigns</li>
+              <li>• Exclusive product campaigns</li>
               <li>• Group discounts (10-30% off)</li>
               <li>• Share to unlock better prices</li>
-              <li>• Premium Indonesian coffee</li>
+              <li>• Premium products from trusted sources</li>
             </ul>
           </div>
         </div>
@@ -71,7 +71,7 @@ export default function Home() {
               Ready to Get Started?
             </h2>
             <p className="text-purple-200 mb-6">
-              Join GOMFLOW as an influencer and start monetizing your coffee audience through group buying campaigns.
+              Join GOMFLOW as an influencer and start monetizing your audience through viral group buying campaigns.
             </p>
             <div className="space-x-4">
               <a 

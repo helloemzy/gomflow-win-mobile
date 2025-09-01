@@ -1,4 +1,4 @@
--- GOMFLOW Indonesian Coffee Group Buying Platform
+-- GOMFLOW Influencer Group Buying Platform
 -- Database Schema (3 tables as specified in CLAUDE.md)
 
 -- Enable UUID extension
@@ -19,12 +19,12 @@ CREATE TABLE IF NOT EXISTS influencers (
 CREATE TABLE IF NOT EXISTS campaigns (
   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
   influencer_id UUID NOT NULL REFERENCES influencers(id) ON DELETE CASCADE,
-  coffee_product VARCHAR(255) NOT NULL,
+  coffee_product VARCHAR(255) NOT NULL, -- Product name (keeping same field name for compatibility)
   target_quantity INTEGER NOT NULL CHECK (target_quantity > 0),
   current_quantity INTEGER DEFAULT 0 NOT NULL CHECK (current_quantity >= 0),
   deadline TIMESTAMP WITH TIME ZONE NOT NULL,
   status VARCHAR(20) DEFAULT 'draft' NOT NULL CHECK (status IN ('draft', 'active', 'completed', 'cancelled')),
-  price_per_kg DECIMAL(10,2) NOT NULL CHECK (price_per_kg > 0),
+  price_per_kg DECIMAL(10,2) NOT NULL CHECK (price_per_kg > 0), -- Price per unit (keeping same field name for compatibility)
   discount_threshold_1 INTEGER DEFAULT 25 NOT NULL,
   discount_threshold_2 INTEGER DEFAULT 50 NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,

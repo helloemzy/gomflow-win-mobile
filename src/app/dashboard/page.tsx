@@ -1,7 +1,11 @@
 import { createServerSupabaseClient } from '@/lib/supabase-server'
 import { redirect } from 'next/navigation'
 
-export default async function DashboardPage() {
+interface DashboardPageProps {
+  searchParams: { onboarding?: string }
+}
+
+export default async function DashboardPage({ searchParams }: DashboardPageProps) {
   const supabase = createServerSupabaseClient()
 
   const {
@@ -29,6 +33,22 @@ export default async function DashboardPage() {
   return (
     <main className="container mx-auto px-4 py-8">
       <div className="max-w-6xl mx-auto">
+        {/* Onboarding Success Banner */}
+        {searchParams.onboarding === 'complete' && (
+          <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
+            <div className="flex items-center">
+              <div className="text-3xl mr-4">🎉</div>
+              <div>
+                <h3 className="font-semibold text-green-900 mb-1">Application Submitted Successfully!</h3>
+                <p className="text-green-700 text-sm">
+                  Your influencer profile is now under review. We'll notify you via email once approved. 
+                  Typically takes 1-2 business days.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
@@ -99,7 +119,7 @@ export default async function DashboardPage() {
           <div className="bg-white rounded-lg shadow-md p-6">
             <h3 className="text-xl font-semibold text-amber-800 mb-3">Create Campaign</h3>
             <p className="text-amber-700 mb-4">
-              Launch a new group buying campaign for premium Indonesian coffee.
+              Launch a new group buying campaign for premium products in your niche.
             </p>
             <a
               href={(influencer as any)?.status === 'active' ? '/dashboard/campaigns/new' : '#'}
@@ -161,7 +181,7 @@ export default async function DashboardPage() {
                     </div>
                     <div>
                       <div className="text-sm text-amber-700">
-                        {campaign.current_quantity}/{campaign.target_quantity} kg
+                        {campaign.current_quantity}/{campaign.target_quantity} units
                       </div>
                       <div className="w-full bg-amber-100 rounded-full h-1 mt-1">
                         <div 
