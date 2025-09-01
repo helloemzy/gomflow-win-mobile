@@ -1,95 +1,182 @@
+import { Button } from '@/components/ui/Button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
+
 export default function Home() {
   return (
-    <main className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto text-center">
-        {/* Hero Section */}
-        <div className="mb-12">
-          <h1 className="text-5xl font-bold text-amber-900 mb-4">
-            GOMFLOW
-          </h1>
-          <p className="text-xl text-amber-800 mb-6">
-            Influencer Group Buying Platform
-          </p>
-          <p className="text-lg text-amber-700 max-w-2xl mx-auto">
-            Create viral group buying campaigns for any product. 
-            Influencers earn commission while customers unlock discounts through social sharing.
-          </p>
-        </div>
-
-        {/* Status Section */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-          <h2 className="text-2xl font-semibold text-amber-800 mb-4">
-            🚀 MVP Development Phase
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-600 mb-2">Week 1</div>
-              <div className="text-amber-600">Technical Foundation</div>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-amber-50">
+      <main className="container mx-auto px-4 py-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Hero Section */}
+          <div className="text-center mb-16">
+            <div className="mb-8">
+              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 to-amber-600 bg-clip-text text-transparent mb-6">
+                GOMFLOW
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-700 mb-6 font-medium">
+                Influencer Group Buying Platform
+              </p>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Create viral group buying campaigns for any product. 
+                Influencers earn commission while customers unlock discounts through social sharing.
+              </p>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-600 mb-2">$5,000</div>
-              <div className="text-amber-600">GMV Target</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">4 Weeks</div>
-              <div className="text-amber-600">To Validation</div>
+            
+            {/* Hero CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
+              <Button size="xl" className="w-full sm:w-auto">
+                <a href="/auth" className="flex items-center space-x-2">
+                  <span>🚀</span>
+                  <span>Start as Influencer</span>
+                </a>
+              </Button>
+              <Button variant="ghost" size="xl" className="w-full sm:w-auto">
+                <a href="/campaigns" className="flex items-center space-x-2">
+                  <span>🛍️</span>
+                  <span>Browse Campaigns</span>
+                </a>
+              </Button>
             </div>
           </div>
-        </div>
 
-        {/* Features Preview */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold text-amber-800 mb-3">
-              For Influencers
-            </h3>
-            <ul className="text-left text-amber-700 space-y-2">
-              <li>• Monetize any audience niche</li>
-              <li>• 15-20% commission on sales</li>
-              <li>• No inventory risk</li>
-              <li>• Easy campaign creation</li>
-            </ul>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold text-amber-800 mb-3">
-              For Customers
-            </h3>
-            <ul className="text-left text-amber-700 space-y-2">
-              <li>• Exclusive product campaigns</li>
-              <li>• Group discounts (10-30% off)</li>
-              <li>• Share to unlock better prices</li>
-              <li>• Premium products from trusted sources</li>
-            </ul>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="mt-12">
-          <div className="bg-purple-600 text-white rounded-lg p-8">
-            <h2 className="text-2xl font-semibold mb-4">
-              Ready to Get Started?
+          {/* How It Works */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+              How It Works
             </h2>
-            <p className="text-purple-200 mb-6">
-              Join GOMFLOW as an influencer and start monetizing your audience through viral group buying campaigns.
-            </p>
-            <div className="space-x-4">
-              <a 
-                href="/auth" 
-                className="inline-block bg-white text-purple-600 hover:bg-purple-50 font-medium py-2 px-6 rounded-lg transition-colors"
-              >
-                Start as Influencer
-              </a>
-              <a 
-                href="/campaigns" 
-                className="inline-block border-2 border-white text-white hover:bg-white hover:text-purple-600 font-medium py-2 px-6 rounded-lg transition-colors"
-              >
-                Browse Campaigns
-              </a>
+            <div className="grid md:grid-cols-3 gap-8">
+              <Card variant="elevated" className="text-center">
+                <CardContent className="py-8">
+                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl text-white font-bold">1</span>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Create Campaign</h3>
+                  <p className="text-gray-600">
+                    Influencers create group buying campaigns for products their audience loves
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card variant="elevated" className="text-center">
+                <CardContent className="py-8">
+                  <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl text-white font-bold">2</span>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Share & Buy</h3>
+                  <p className="text-gray-600">
+                    Customers join campaigns and share with friends to unlock group discounts
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card variant="elevated" className="text-center">
+                <CardContent className="py-8">
+                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl text-white font-bold">3</span>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Everyone Wins</h3>
+                  <p className="text-gray-600">
+                    Higher quantities mean better prices for customers and more commission for influencers
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
+
+          {/* Features Grid */}
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
+            <Card variant="elevated">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <span className="text-2xl">🎯</span>
+                  <span>For Influencers</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                    <span>Monetize any audience niche</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                    <span>15-20% commission on sales</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                    <span>No inventory risk</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                    <span>Easy campaign creation</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card variant="elevated">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <span className="text-2xl">🛍️</span>
+                  <span>For Customers</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
+                    <span>Exclusive product campaigns</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
+                    <span>Group discounts (10-30% off)</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
+                    <span>Share to unlock better prices</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
+                    <span>Premium products from trusted sources</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* CTA Section */}
+          <Card variant="glass" className="bg-gradient-to-r from-purple-600 to-purple-800 text-white border-0">
+            <CardContent className="py-12 text-center">
+              <h2 className="text-3xl font-bold mb-4">
+                Ready to Get Started?
+              </h2>
+              <p className="text-purple-100 mb-8 text-lg max-w-2xl mx-auto">
+                Join GOMFLOW as an influencer and start monetizing your audience through viral group buying campaigns.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+                <Button 
+                  size="xl" 
+                  className="bg-white text-purple-600 hover:bg-gray-100 w-full sm:w-auto"
+                >
+                  <a href="/auth" className="flex items-center space-x-2">
+                    <span>🚀</span>
+                    <span>Start as Influencer</span>
+                  </a>
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="xl" 
+                  className="border-2 border-white text-white hover:bg-white hover:text-purple-600 w-full sm:w-auto"
+                >
+                  <a href="/campaigns" className="flex items-center space-x-2">
+                    <span>🛍️</span>
+                    <span>Browse Campaigns</span>
+                  </a>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   )
 }
