@@ -1,6 +1,7 @@
 import { createServerSupabaseClient } from '@/lib/supabase-server'
 import { notFound } from 'next/navigation'
 import CheckoutButton from '@/components/stripe/CheckoutButton'
+import ShareButtons from '@/components/share/ShareButtons'
 import { isStripeConfigured, formatPrice } from '@/lib/stripe'
 
 interface CampaignPageProps {
@@ -186,6 +187,15 @@ export default async function CampaignPage({ params, searchParams }: CampaignPag
               })}
             </div>
           )}
+        </div>
+
+        {/* Share Section */}
+        <div className="mt-8 bg-white rounded-lg shadow-md p-6">
+          <ShareButtons
+            campaignId={params.id}
+            campaignTitle={`${(campaign as any).coffee_product} - Group Buying Campaign`}
+            campaignUrl={`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/campaigns/${params.id}`}
+          />
         </div>
 
         {/* Campaign Info */}

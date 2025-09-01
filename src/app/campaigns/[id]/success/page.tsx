@@ -1,5 +1,6 @@
 import { createServerSupabaseClient } from '@/lib/supabase-server'
 import { formatPrice } from '@/lib/stripe'
+import ShareButtons from '@/components/share/ShareButtons'
 import Link from 'next/link'
 
 interface SuccessPageProps {
@@ -119,19 +120,12 @@ export default async function SuccessPage({ params, searchParams }: SuccessPageP
         </div>
 
         {/* Share Section */}
-        <div className="bg-purple-600 text-white rounded-lg p-6 mb-8">
-          <h2 className="text-xl font-semibold mb-4">Help Your Friends Save Too! ☕</h2>
-          <p className="text-purple-200 mb-4">
-            Share this campaign and help everyone unlock better group discounts.
-          </p>
-          <div className="flex justify-center space-x-4">
-            <button className="bg-white text-purple-600 hover:bg-purple-50 px-4 py-2 rounded-lg font-medium transition-colors">
-              Share on WhatsApp
-            </button>
-            <button className="bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-              Copy Link
-            </button>
-          </div>
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <ShareButtons
+            campaignId={params.id}
+            campaignTitle={`${(campaign as any)?.coffee_product} - Group Buying Campaign`}
+            campaignUrl={`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/campaigns/${params.id}`}
+          />
         </div>
 
         {/* Action Buttons */}

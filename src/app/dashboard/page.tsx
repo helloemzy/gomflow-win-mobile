@@ -101,12 +101,16 @@ export default async function DashboardPage() {
             <p className="text-amber-700 mb-4">
               Launch a new group buying campaign for premium Indonesian coffee.
             </p>
-            <button
-              disabled={(influencer as any)?.status !== 'active'}
-              className="bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+            <a
+              href={(influencer as any)?.status === 'active' ? '/dashboard/campaigns/new' : '#'}
+              className={`inline-block text-center font-medium py-2 px-4 rounded-lg transition-colors ${
+                (influencer as any)?.status === 'active'
+                  ? 'bg-purple-600 hover:bg-purple-700 text-white cursor-pointer'
+                  : 'bg-gray-400 text-gray-200 cursor-not-allowed'
+              }`}
             >
               {(influencer as any)?.status === 'active' ? 'New Campaign' : 'Pending Approval'}
-            </button>
+            </a>
           </div>
 
           {/* Getting Started */}
@@ -130,21 +134,28 @@ export default async function DashboardPage() {
             <h2 className="text-2xl font-semibold text-amber-900 mb-4">Your Campaigns</h2>
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
               <div className="px-6 py-4 bg-amber-50 border-b">
-                <div className="grid grid-cols-4 gap-4 font-medium text-amber-800">
+                <div className="grid grid-cols-5 gap-4 font-medium text-amber-800">
                   <div>Campaign</div>
                   <div>Status</div>
                   <div>Progress</div>
                   <div>Deadline</div>
+                  <div>Actions</div>
                 </div>
               </div>
               {campaigns.map((campaign: any) => (
                 <div key={campaign.id} className="px-6 py-4 border-b border-amber-100">
-                  <div className="grid grid-cols-4 gap-4">
+                  <div className="grid grid-cols-5 gap-4 items-center">
                     <div>
                       <div className="font-medium text-amber-900">{campaign.coffee_product}</div>
+                      <div className="text-xs text-amber-600 mt-1">ID: {campaign.id.slice(0, 8)}...</div>
                     </div>
                     <div>
-                      <span className="inline-block px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800 capitalize">
+                      <span className={`inline-block px-2 py-1 text-xs rounded-full capitalize ${
+                        campaign.status === 'active' ? 'bg-green-100 text-green-800' :
+                        campaign.status === 'completed' ? 'bg-blue-100 text-blue-800' :
+                        campaign.status === 'draft' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-gray-100 text-gray-800'
+                      }`}>
                         {campaign.status}
                       </span>
                     </div>
@@ -152,11 +163,28 @@ export default async function DashboardPage() {
                       <div className="text-sm text-amber-700">
                         {campaign.current_quantity}/{campaign.target_quantity} kg
                       </div>
+                      <div className="w-full bg-amber-100 rounded-full h-1 mt-1">
+                        <div 
+                          className="bg-amber-500 h-1 rounded-full"
+                          style={{ width: `${Math.min((campaign.current_quantity / campaign.target_quantity) * 100, 100)}%` }}
+                        ></div>
+                      </div>
                     </div>
                     <div>
                       <div className="text-sm text-amber-700">
                         {new Date(campaign.deadline).toLocaleDateString()}
                       </div>
+                      <div className="text-xs text-amber-600">
+                        {Math.max(0, Math.ceil((new Date(campaign.deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))} days left
+                      </div>
+                    </div>
+                    <div>
+                      <a
+                        href={`/campaigns/${campaign.id}`}
+                        className="text-purple-600 hover:text-purple-700 text-sm font-medium"
+                      >
+                        View →
+                      </a>
                     </div>
                   </div>
                 </div>
